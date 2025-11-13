@@ -212,8 +212,9 @@ input:checked + .slider:before {
     font-size: 45px;
 }
 
-/* RESPONSIVE WIDTH */
+/* ------------- RESPONSIVE WIDTH -------------*/
 
+/* ------------- GENEL -------------*/
 /* DESKTOP*/
 @media (min-width: 1025px) {
     #describe-movie,
@@ -229,5 +230,55 @@ input:checked + .slider:before {
     #results,
     #footer{
         width: 50%;
+    }
+}
+
+/* ------------- DESCRIBE-MOVIE -------------*/
+/* MOBIL */
+@media (max-width: 600px) {
+    #describe-movie {
+        width: 95%;
+    }
+
+    .form-row label {
+        width: 80px;
+        font-size: 14px;
+    }
+    
+    #describe-movie input {
+        width: 120px;
+        font-size: 13px;
+        padding: 4px 5px;
+    }
+
+    #describe-movie select {
+        width: 130px;
+        font-size: 13px;
+        padding: 4px 5px;
+    }
+
+    .form-row {
+        gap: 6px;
+        margin: 6px 0;
+    }
+
+    .switch {
+        width: 20px;
+        height: 10px;
+    }
+
+    .slider {
+        border-radius: 10px;
+    }
+
+    .slider:before {
+        height: 8px;
+        width: 8px;
+        left: 1px;
+        bottom: 1px;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(10px);
     }
 }
