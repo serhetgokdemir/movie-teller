@@ -9,19 +9,34 @@
 <body>
     <div id="header">
         <p id="star-header">★</p>
-        <h1>your own personal movie-teller</h1>
-        <p id="description">describe the movie and get a recommendation</p>
+        <h1 id="header-title">your own personal movie-teller</h1>
+        <p id="description"> describe the movie and get a recommendation</p>
+
+        <div class="dropdown-wrapper">
+            <div class="dropdown">
+                <div class="dropdown-selected" id="lang-selected">English</div>
+                <ul class="dropdown-options" id="lang-options">
+                    <li data-value="en">English</li>
+                    <li data-value="tr">Türkçe</li>
+                </ul>
+            </div>
+        </div>
     </div>
+    
     <div id="describe-movie">
-        <p>placeholder</p>
+        <p id="placeholder-describe">placeholder</p>
     </div>
+
     <div id="results">
-        <p>placeholder</p>
+        <p id="placeholder-results">placeholder</p>
     </div>
+
     <div id="footer">
-        <p><span id="star-footer">★</span>
-            Movie Teller is a lightweight, add-free movie recommendation app created by Serhet Gokdemir.
-            <i><a href="https://serhet.com" target="_blank">See my personal web site.</a></i>
+        <p>
+            <span id="star-footer">★</span>
+            <span id="footer-text">
+                Movie Teller is a lightweight, add-free movie recommendation app created by Serhet Gokdemir. 
+            </span><i><a id="footer-link" href="https://serhet.com" target="_blank">See my personal web site.</a></i>
         </p>
     </div>
 </body>
