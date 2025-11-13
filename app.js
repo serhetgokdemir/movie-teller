@@ -78,3 +78,43 @@ for (let y = 2026; y >= 1900; y--) {
     opt.textContent = y;
     yearMinSelect.appendChild(opt);
 }
+
+/* -------------------- ON-OFF FOR FILTERING --------------------*/
+
+/* GENRE */
+const useGenre = document.getElementById("genre-toggle");
+const genreInput = document.getElementById("genre-input");
+
+useGenre.addEventListener("change", () => {
+    if (useGenre.checked) {
+        genreInput.disabled = false;
+    } else {
+        genreInput.disabled = true;
+    }
+});
+
+/* YEAR-MAX */
+const useYearMax = document.getElementById("year-max-toggle");
+useYearMax.addEventListener("change", () => {
+    if (useYearMax.checked) {
+        yearMaxSelect.disabled = false;
+    } else {
+        yearMaxSelect.disabled = true;
+    }
+});
+
+/* YEAR-MIN */
+const useYearMin = document.getElementById("year-min-toggle");
+useYearMin.addEventListener("change", () => {
+    if (useYearMin.checked) {
+        yearMinSelect.disabled = false;
+    } else {
+        yearMinSelect.disabled = true;
+    }
+});
+
+/* RATING-MAX */
+
+/* RATING-MIN */
+
+/* COUNTRY */
