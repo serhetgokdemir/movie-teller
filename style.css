@@ -125,3 +125,23 @@ body {
 #star-footer{
     font-size: 45px;
 }
+
+/* RESPONSIVE WIDTH */
+
+/* DESKTOP*/
+@media (min-width: 1025px) {
+    #describe-movie,
+    #results,
+    #footer{
+        width: 50%;
+    }
+}
+
+/* MOBIL*/
+@media (min-width: 600px) {
+    #describe-movie,
+    #results,
+    #footer{
+        width: 50%;
+    }
+}
