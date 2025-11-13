@@ -31,7 +31,7 @@ body {
     text-align: center;
 }
 
-#star{
+#star-header{
     font-size: 45px;
     margin-bottom: 0;
 }
@@ -79,4 +79,9 @@ body {
 
 #footer a:hover{
     color: yellow;
+}
+
+#star-footer{
+    font-size: 45px;
+    
 }
