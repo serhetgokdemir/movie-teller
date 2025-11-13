@@ -1,3 +1,5 @@
+/* ----------- BODY ----------- */
+
 body {
     font-family: 'Times New Roman', Times, serif;
     color: yellow;
@@ -12,6 +14,8 @@ body {
     overflow-x: hidden;
     background-image: linear-gradient(to top, #000000 0%, #000ba4 100%);
 }
+
+/* ----------- HEADER ----------- */
 
 #header
 {   
@@ -35,3 +39,5 @@ body {
     font-size: 45px;
     margin-bottom: 0;
 }
+
+/* ----------- DESCRIBE-MOVIE ----------- */
