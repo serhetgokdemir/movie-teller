@@ -14,8 +14,24 @@ body {
 }
 
 #header
-{
-    font-style: italic;
-    text-decoration: underline;
+{   
     text-align: center;
+}
+
+#header h1
+{
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+#description{
+    text-align: center;
+}
+
+#star
+{
+    font-size: 45px;
+    margin-bottom: 0;
 }
