@@ -24,7 +24,37 @@
     </div>
     
     <div id="describe-movie">
-        <p id="placeholder-describe">placeholder</p>
+                <div class="form-row">
+            <label for="genre">Genre:</label>
+            <input id="genre-input" type="text">
+        </div>
+
+        <div class="form-row">
+            <label for="year-max-select">Year (Max):</label>
+            <select id="year-max-select"></select>
+        </div>
+
+        <div class="form-row">
+            <label for="year-min-select">Year (Min):</label>
+            <select id="year-min-select"></select>
+        </div>
+
+        <div class="form-row">
+            <label for="rating-max">Rating (Max):</label>
+            <input id="rating-max" type="number">
+        </div>
+
+        <div class="form-row">
+            <label for="rating-min">Rating (Min):</label>
+            <input id="rating-min" type="number">
+        </div>
+
+        <div class="form-row">
+            <label for="country">Country:</label>
+            <input id="country" type="text">
+        </div>
+
+        <button id="get">FIND!</button>
     </div>
 
     <div id="results">

@@ -58,3 +58,23 @@ document.addEventListener("click", (e) => {
         options.style.display = "none";
     }
 });
+
+/* -------------------- YEAR SELECT -------------------- */
+
+const yearMaxSelect = document.getElementById("year-max-select");
+
+for (let y = 2026; y >= 1900; y--) {
+    const opt = document.createElement("option");
+    opt.value = y;
+    opt.textContent = y;
+    yearMaxSelect.appendChild(opt);
+}
+
+const yearMinSelect = document.getElementById("year-min-select");
+
+for (let y = 2026; y >= 1900; y--) {
+    const opt = document.createElement("option");
+    opt.value = y;
+    opt.textContent = y;
+    yearMinSelect.appendChild(opt);
+}

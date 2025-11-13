@@ -89,6 +89,30 @@ body {
     margin-left: 5px;
 }
 
+#get {
+    display: block;
+    margin: 15px 250px;
+    padding: 8px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: yellow;
+    border: 1px solid yellow;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px;
+}
+
+.form-row label {
+    width: 120px;
+}
+
+
 /* ----------- RESULTS ----------- */
 #results{
     border: 3px solid black;
@@ -98,6 +122,16 @@ body {
 }
 #results p{
     margin-left: 5px;
+}
+
+#year-max-select{
+    background: rgba(0, 0, 0, 0.7);
+    color: rgb(239, 239, 239);
+}
+
+#year-min-select{
+    background: rgba(0, 0, 0, 0.7);
+    color: rgb(239, 239, 239);
 }
 
 /* ----------- FOOTER ----------- */
