@@ -41,3 +41,37 @@ body {
 }
 
 /* ----------- DESCRIBE-MOVIE ----------- */
+#describe-movie{
+    border: 3px solid black;
+    width: 50%;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+#describe-movie p{
+    margin-left: 5px;
+}
+
+/* ----------- RESULTS ----------- */
+#results{
+    border: 3px solid black;
+    width: 50%;
+    margin-bottom: 5px;
+    text-align: left;
+}
+#results p{
+    margin-left: 5px;
+}
+
+/* ----------- FOOTER ----------- */
+#footer{
+    border: 3px solid black;
+    width: 50%;
+    margin-bottom: 5px;
+    text-align: center;
+    text-align: left;
+}
+
+#footer p{
+    margin-left: 5px;
+}
