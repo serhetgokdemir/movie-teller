@@ -114,7 +114,38 @@ useYearMin.addEventListener("change", () => {
 });
 
 /* RATING-MAX */
+const ratingMax = document.getElementById("rating-max");
+const useRatingMax = document.getElementById("rating-max-toggle");
+
+useRatingMax.addEventListener("change", () => {
+    if (useRatingMax.checked) {
+        ratingMax.disabled = false;
+    } else {
+        ratingMax.disabled = true;
+    }
+});
 
 /* RATING-MIN */
+const ratingMin = document.getElementById("rating-min");
+const useRatingMin = document.getElementById("rating-min-toggle");
+
+useRatingMin.addEventListener("change", () => {
+    if (useRatingMin.checked) {
+        ratingMin.disabled = false;
+    } else {
+        ratingMin.disabled = true;
+    }
+});
 
 /* COUNTRY */
+
+const country = document.getElementById("country");
+const useCountry = document.getElementById("country-toggle");
+
+useCountry.addEventListener("change", () => {
+    if (useCountry.checked) {
+        country.disabled = false;
+    } else {
+        country.disabled = true;
+    }
+});
