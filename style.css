@@ -96,8 +96,25 @@ body {
     font-size: 14px;
 }
 
+.buttons{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+}
 
 #get {
+    display: block;
+    margin: 15px auto;
+    padding: 8px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: yellow;
+    border: 1px solid yellow;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#reset {
     display: block;
     margin: 15px auto;
     padding: 8px 20px;
@@ -111,7 +128,7 @@ body {
 .form-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;  /* toggle'ı sağa alır */
+    justify-content: space-between;
     gap: 10px;
     margin: 8px 0;
 }

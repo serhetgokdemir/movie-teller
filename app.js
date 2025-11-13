@@ -145,3 +145,25 @@ useCountry.addEventListener("change", () => {
         country.disabled = true;
     }
 });
+
+/* -------------------- RESET --------------------*/
+const allInputs = document.querySelectorAll(
+    "#describe-movie input, #describe-movie select"
+);
+const allToggles = document.querySelectorAll("#describe-movie .switch input");
+
+const reset = document.getElementById("reset");
+
+reset.addEventListener("click", () => {
+
+    allInputs.forEach(el => {
+        el.value = "";
+        el.disabled = false;
+    });
+
+    allToggles.forEach(t => {
+        t.checked = true;
+    });
+});
+
+
