@@ -62,8 +62,7 @@ document.addEventListener("click", (e) => {
 /* -------------------- YEAR SELECT -------------------- */
 
 const yearMaxSelect = document.getElementById("year-max-select");
-
-for (let y = 2026; y >= 1900; y--) {
+for (let y = 2025; y >= 1900; y--) {
     const opt = document.createElement("option");
     opt.value = y;
     opt.textContent = y;
@@ -71,8 +70,7 @@ for (let y = 2026; y >= 1900; y--) {
 }
 
 const yearMinSelect = document.getElementById("year-min-select");
-
-for (let y = 2026; y >= 1900; y--) {
+for (let y = 1900; y <= 2025; y++) {
     const opt = document.createElement("option");
     opt.value = y;
     opt.textContent = y;
