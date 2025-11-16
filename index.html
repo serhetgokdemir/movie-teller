@@ -26,7 +26,7 @@
     <div id="describe-movie">
         <div class="form-row">
             <label for="genre">Genre:</label>
-            <input id="genre-input" type="text">
+            <select id="genre-select"></select>
             
             <label class="switch">
             <input type="checkbox" id="genre-toggle" checked>
@@ -76,7 +76,7 @@
 
         <div class="form-row">
             <label for="country">Country:</label>
-            <input id="country" type="text">
+            <select id="country-select"></select>
 
             <label class="switch">
             <input type="checkbox" id="country-toggle" checked>
@@ -88,19 +88,22 @@
             <button id="reset">Reset</button>
             <button id="get">FIND!</button>
         </div>
-        
+   
     </div>
 
     <div id="results">
-        <p id="placeholder-results">placeholder</p>
+        <h2 id="result-title">Your movie will appear here</h2>
+        <p id="result-meta"></p>
+        <p id="result-overview"></p>
     </div>
+
 
     <div id="footer">
         <p>
             <span id="star-footer">★</span>
             <span id="footer-text">
                 Movie Teller is a lightweight, add-free movie recommendation app created by Serhet Gokdemir. 
-            </span><i><a id="footer-link" href="https://serhet.com" target="_blank">See my personal web site.</a></i>
+            </span><i><a id="footer-link" href="https://serhet.com" target="_blank">See my other work.</a></i>
         </p>
     </div>
 </body>
