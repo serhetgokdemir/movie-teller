@@ -1,3 +1,6 @@
+const API_KEY = TMDB_API_KEY;
+const BASE_URL = "https://api.themoviedb.org/3";
+
 /* -------------------- TRANSLATIONS -------------------- */
 
 const translations = {
@@ -80,14 +83,10 @@ for (let y = 2026; y >= 1900; y--) {
 
 /* GENRE */
 const useGenre = document.getElementById("genre-toggle");
-const genreInput = document.getElementById("genre-input");
+const genreSelect = document.getElementById("genre-select");
 
 useGenre.addEventListener("change", () => {
-    if (useGenre.checked) {
-        genreInput.disabled = false;
-    } else {
-        genreInput.disabled = true;
-    }
+    genreSelect.disabled = !useGenre.checked;
 });
 
 /* YEAR-MAX */
@@ -135,8 +134,12 @@ useRatingMin.addEventListener("change", () => {
 });
 
 /* COUNTRY */
-const country = document.getElementById("country");
 const useCountry = document.getElementById("country-toggle");
+const countrySelect = document.getElementById("country-select");
+useCountry.addEventListener("change", () => {
+    countrySelect.disabled = !useCountry.checked;
+});
+
 
 useCountry.addEventListener("change", () => {
     if (useCountry.checked) {
@@ -166,4 +169,113 @@ reset.addEventListener("click", () => {
     });
 });
 
+/* -------------------- RESULTS SECTION --------------------*/
+function renderMovie(movie) {
+    const titleEl = document.getElementById("result-title");
+    const metaEl = document.getElementById("result-meta");
+    const overviewEl = document.getElementById("result-overview");
 
+    const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "?";
+    const popularity = movie.popularity ? movie.popularity.toFixed(1) : "?";
+
+    titleEl.textContent = `${movie.title} (${movie.release_date?.slice(0,4) || "?"})`;
+
+    metaEl.textContent =
+        `Rating: ${rating} | Popularity: ${popularity}`;
+
+    overviewEl.textContent = movie.overview || "No description available.";
+}
+
+
+async function testTMDB() {
+    try {
+        const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
+        const data = await response.json();
+
+        console.log("TMDb bağlantı başarılı.");
+        console.log(data.results.slice(0, 5));
+    } catch (err) {
+        console.error("TMDb bağlantı hatası:", err);
+    }
+}
+
+testTMDB();
+
+async function loadGenres() {
+    const res = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en`);
+    const data = await res.json();
+
+    const genreSelect = document.getElementById("genre-select");
+
+    data.genres.forEach(genre => {
+        const opt = document.createElement("option");
+        opt.value = genre.id;
+        opt.textContent = genre.name;
+        genreSelect.appendChild(opt);
+    });
+}
+
+loadGenres();
+
+const findBtn = document.getElementById("get");
+const genreToggle = document.getElementById("genre-toggle");
+
+findBtn.addEventListener("click", async () => {
+
+    let url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
+
+    /* GENRE */
+    if (genreToggle.checked && genreSelect.value !== "") {
+        url += `&with_genres=${genreSelect.value}`;
+    }
+
+    /* YEAR MIN */
+    if (useYearMin.checked && yearMinSelect.value !== "") {
+        url += `&primary_release_date.gte=${yearMinSelect.value}-01-01`;
+    }
+
+    /* YEAR MAX */
+    if (useYearMax.checked && yearMaxSelect.value !== "") {
+        url += `&primary_release_date.lte=${yearMaxSelect.value}-12-31`;
+    }
+
+    /* RATING MIN */
+    if (useRatingMin.checked && ratingMin.value !== "") {
+        url += `&vote_average.gte=${ratingMin.value}`;
+    }
+
+    /* RATING MAX */
+    if (useRatingMax.checked && ratingMax.value !== "") {
+        url += `&vote_average.lte=${ratingMax.value}`;
+    }
+
+    /* ---- COUNTRY ----*/
+    if (useCountry.checked && countrySelect.value !== "") {
+        url += `&with_origin_country=${countrySelect.value}`;
+    }
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.results.length > 0) {
+        const randomIndex = Math.floor(Math.random() * data.results.length);
+        const movie = data.results[randomIndex];
+        renderMovie(movie);
+    } else {
+        document.getElementById("results").innerHTML = "<p>No movie found.</p>";
+    }
+});
+
+async function loadCountries() {
+    const res = await fetch(`${BASE_URL}/configuration/countries?api_key=${API_KEY}`);
+    const countries = await res.json();
+
+
+    countries.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c.iso_3166_1;
+        opt.textContent = c.english_name;
+        countrySelect.appendChild(opt);
+    });
+}
+loadCountries();
