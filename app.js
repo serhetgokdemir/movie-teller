@@ -222,7 +222,8 @@ const genreToggle = document.getElementById("genre-toggle");
 
 findBtn.addEventListener("click", async () => {
 
-    let url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
+    const randomPage = Math.floor(Math.random() * 10) + 1;
+    let url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${randomPage}`;
 
     /* GENRE */
     if (genreToggle.checked && genreSelect.value !== "") {
