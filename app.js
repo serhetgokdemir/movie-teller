@@ -205,6 +205,11 @@ async function loadGenres() {
 
     const genreSelect = document.getElementById("genre-select");
 
+    const emptyOpt = document.createElement("option");
+    emptyOpt.value = "";
+    emptyOpt.textContent = "";
+    genreSelect.appendChild(emptyOpt);
+
     data.genres.forEach(genre => {
         const opt = document.createElement("option");
         opt.value = genre.id;
@@ -269,6 +274,12 @@ async function loadCountries() {
     const res = await fetch(`${BASE_URL}/configuration/countries?api_key=${API_KEY}`);
     const countries = await res.json();
 
+    const countrySelect = document.getElementById("country-select");
+
+    const emptyOpt = document.createElement("option");
+    emptyOpt.value = "";
+    emptyOpt.textContent = "";
+    countrySelect.appendChild(emptyOpt);
 
     countries.forEach(c => {
         const opt = document.createElement("option");
