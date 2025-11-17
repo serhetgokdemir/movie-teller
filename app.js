@@ -8,15 +8,31 @@ const translations = {
         headerTitle: "your own personal movie-teller",
         description: "describe the movie and get a recommendation",
         placeholderResults: "placeholder",
-        footerText: "Movie Teller is a lightweight, add-free movie recommendation app created by Serhet Gokdemir. ",
-        footerLink: "See my personal web site."
+        footerText: "Movie Teller is a lightweight and add-free movie recommendation app created by Serhet Gokdemir. ",
+        footerLink: "See my personal web site.",
+        genre: "Genre:",
+        yearMaxSelect: "Year(Max):",
+        yearMinSelect: "Year(Min):",
+        ratingMax: "Rating(Max):",
+        ratingMin: "Rating(Min)",
+        country: "Country:",
+        reset: "Reset",
+        get: "FIND!"
     },
     tr: {
         headerTitle: "your own personal movie-teller",
-        description: "filmi tarif et, öneriyi al",
+        description: "filmi tarif et, oneriyi al",
         placeholderResults: "placeholder",
         footerText: "Movie Teller, Serhet Gokdemir tarafindan olusturulmus hafif ve reklamsiz bir film oneri uygulamasidir. ",
-        footerLink: "Kisisel web sitemi gor."
+        footerLink: "Kisisel web sitemi gor.",
+        genre: "Tur:",
+        yearMaxSelect : "Yil(Max):",
+        yearMinSelect: "Yil(Min):",
+        ratingMax: "Puan(Max):",
+        ratingMin: "Puan(Min):",
+        country: "Ulke:",
+        reset: "Sifirla",
+        get: "BUL!"
     }
 };
 
@@ -24,13 +40,23 @@ const translations = {
 /* -------------------- LANGUAGE SET -------------------- */
 
 function setLanguage(lang) {
-    document.getElementById("header-title").textContent = translations[lang].headerTitle;
-    document.getElementById("description").firstChild.textContent = translations[lang].description + " ";
-    document.getElementById("placeholder-results").textContent = translations[lang].placeholderResults;
-    document.getElementById("footer-text").textContent = translations[lang].footerText;
-    document.getElementById("footer-link").textContent = translations[lang].footerLink;
-}
+    const t = translations[lang];
 
+    document.getElementById("header-title").textContent = t.headerTitle;
+    document.getElementById("description").textContent = t.description;
+    document.getElementById("footer-text").textContent = t.footerText;
+    document.getElementById("footer-link").textContent = t.footerLink;
+    document.getElementById("reset").textContent = t.reset;
+    document.getElementById("get").textContent = t.get;
+
+
+    document.querySelector('label[for="genre"]').textContent = t.genre;
+    document.querySelector('label[for="year-max-select"]').textContent = t.yearMaxSelect;
+    document.querySelector('label[for="year-min-select"]').textContent = t.yearMinSelect;
+    document.querySelector('label[for="rating-max"]').textContent = t.ratingMax;
+    document.querySelector('label[for="rating-min"]').textContent = t.ratingMin;
+    document.querySelector('label[for="country"]').textContent = t.country;
+}
 
 /* -------------------- CUSTOM DROPDOWN -------------------- */
 
