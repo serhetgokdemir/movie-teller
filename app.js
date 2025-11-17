@@ -268,55 +268,75 @@ const genreToggle = document.getElementById("genre-toggle");
 
 findBtn.addEventListener("click", async () => {
 
-    const randomPage = Math.floor(Math.random() * 10) + 1;
-    let url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${randomPage}`;
+    let url = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
 
-    /* GENRE */
-    if (genreToggle.checked && genreSelect.value !== "") {
+    // GENRE
+    if (useGenre.checked && genreSelect.value !== "") {
         url += `&with_genres=${genreSelect.value}`;
     }
 
-    /* YEAR MIN */
+    // YEAR MIN
     if (useYearMin.checked && yearMinSelect.value !== "") {
         url += `&primary_release_date.gte=${yearMinSelect.value}-01-01`;
     }
 
-    /* YEAR MAX */
+    // YEAR MAX
     if (useYearMax.checked && yearMaxSelect.value !== "") {
         url += `&primary_release_date.lte=${yearMaxSelect.value}-12-31`;
     }
 
-    /* RATING MIN */
+    // RATING MIN
     if (useRatingMin.checked && ratingMin.value !== "") {
         url += `&vote_average.gte=${ratingMin.value}`;
     }
 
-    /* RATING MAX */
+    // RATING MAX
     if (useRatingMax.checked && ratingMax.value !== "") {
         url += `&vote_average.lte=${ratingMax.value}`;
     }
 
-    /* ---- COUNTRY ----*/
+    // COUNTRY
     if (useCountry.checked && countrySelect.value !== "") {
         url += `&with_origin_country=${countrySelect.value}`;
     }
 
-    const res = await fetch(url);
-    const data = await res.json();
+    // Toplam sayfa sayisini bul
+    const first = await fetch(url + "&page=1");
+    const firstData = await first.json();
 
-    if (data.results.length > 0) {
-        const randomIndex = Math.floor(Math.random() * data.results.length);
-        const movie = data.results[randomIndex];
-        renderMovie(movie);a
-    } else {
-        const titleEl = document.getElementById("result-title");
-        const metaEl = document.getElementById("result-meta");
-        const overviewEl = document.getElementById("result-overview");
+    let totalPages = Math.min(firstData.total_pages || 1, 500);
 
-        titleEl.textContent = "No movie found.";
-        metaEl.textContent = "";
-        overviewEl.textContent = "";
+    if (totalPages === 0) {
+        renderMovie({
+            title: "No movie found.",
+            overview: "",
+            vote_average: null,
+            popularity: null
+        });
+        return;
     }
+
+    // Page randomizer
+    const randomPage = Math.floor(Math.random() * totalPages) + 1;
+
+    const pageRes = await fetch(url + `&page=${randomPage}`);
+    const pageData = await pageRes.json();
+
+    if (!pageData.results || pageData.results.length === 0) {
+        renderMovie({
+            title: "No movie found.",
+            overview: "",
+            vote_average: null,
+            popularity: null
+        });
+        return;
+    }
+
+    // Movie randomizer
+    const randomIndex = Math.floor(Math.random() * pageData.results.length);
+    const movie = pageData.results[randomIndex];
+
+    renderMovie(movie);
 });
 
 async function loadCountries() {
