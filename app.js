@@ -88,6 +88,13 @@ document.addEventListener("click", (e) => {
 /* -------------------- YEAR SELECT -------------------- */
 
 const yearMaxSelect = document.getElementById("year-max-select");
+
+// Any seçeneği
+const emptyMax = document.createElement("option");
+emptyMax.value = "";
+emptyMax.textContent = "Any";
+yearMaxSelect.appendChild(emptyMax);
+
 for (let y = 2025; y >= 1900; y--) {
     const opt = document.createElement("option");
     opt.value = y;
@@ -96,12 +103,18 @@ for (let y = 2025; y >= 1900; y--) {
 }
 
 const yearMinSelect = document.getElementById("year-min-select");
+const emptyMin = document.createElement("option");
+emptyMin.value = "";
+emptyMin.textContent = "Any";
+yearMinSelect.appendChild(emptyMin);
+
 for (let y = 1900; y <= 2025; y++) {
     const opt = document.createElement("option");
     opt.value = y;
     opt.textContent = y;
     yearMinSelect.appendChild(opt);
 }
+
 
 /* -------------------- ON-OFF FOR FILTERING --------------------*/
 
@@ -137,6 +150,8 @@ useYearMin.addEventListener("change", () => {
 const ratingMax = document.getElementById("rating-max");
 const useRatingMax = document.getElementById("rating-max-toggle");
 
+ratingMax.placeholder = "Any";
+
 useRatingMax.addEventListener("change", () => {
     if (useRatingMax.checked) {
         ratingMax.disabled = false;
@@ -148,6 +163,8 @@ useRatingMax.addEventListener("change", () => {
 /* RATING-MIN */
 const ratingMin = document.getElementById("rating-min");
 const useRatingMin = document.getElementById("rating-min-toggle");
+
+ratingMin.placeholder = "Any";
 
 useRatingMin.addEventListener("change", () => {
     if (useRatingMin.checked) {
@@ -233,7 +250,7 @@ async function loadGenres() {
 
     const emptyOpt = document.createElement("option");
     emptyOpt.value = "";
-    emptyOpt.textContent = "";
+    emptyOpt.textContent = "Any";
     genreSelect.appendChild(emptyOpt);
 
     data.genres.forEach(genre => {
@@ -290,7 +307,7 @@ findBtn.addEventListener("click", async () => {
     if (data.results.length > 0) {
         const randomIndex = Math.floor(Math.random() * data.results.length);
         const movie = data.results[randomIndex];
-        renderMovie(movie);
+        renderMovie(movie);a
     } else {
         document.getElementById("results").innerHTML = "<p>No movie found.</p>";
     }
@@ -304,7 +321,7 @@ async function loadCountries() {
 
     const emptyOpt = document.createElement("option");
     emptyOpt.value = "";
-    emptyOpt.textContent = "";
+    emptyOpt.textContent = "Any";
     countrySelect.appendChild(emptyOpt);
 
     countries.forEach(c => {
