@@ -309,7 +309,13 @@ findBtn.addEventListener("click", async () => {
         const movie = data.results[randomIndex];
         renderMovie(movie);a
     } else {
-        document.getElementById("results").innerHTML = "<p>No movie found.</p>";
+        const titleEl = document.getElementById("result-title");
+        const metaEl = document.getElementById("result-meta");
+        const overviewEl = document.getElementById("result-overview");
+
+        titleEl.textContent = "No movie found.";
+        metaEl.textContent = "";
+        overviewEl.textContent = "";
     }
 });
 
