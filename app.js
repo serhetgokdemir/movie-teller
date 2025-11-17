@@ -303,8 +303,8 @@ async function loadCountries() {
     const countrySelect = document.getElementById("country-select");
 
     const emptyOpt = document.createElement("option");
-    emptyOpt.value = "Any";
-    emptyOpt.textContent = "Any";
+    emptyOpt.value = "";
+    emptyOpt.textContent = "";
     countrySelect.appendChild(emptyOpt);
 
     countries.forEach(c => {
