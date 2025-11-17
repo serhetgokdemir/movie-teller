@@ -11,10 +11,10 @@ const translations = {
         footerText: "Movie Teller is a lightweight and add-free movie recommendation app created by Serhet Gokdemir. ",
         footerLink: "See my personal web site.",
         genre: "Genre:",
-        yearMaxSelect: "Year(Max):",
-        yearMinSelect: "Year(Min):",
-        ratingMax: "Rating(Max):",
-        ratingMin: "Rating(Min)",
+        yearMaxSelect: "Year Max):",
+        yearMinSelect: "Year (Min):",
+        ratingMax: "Rating (Max):",
+        ratingMin: "Rating (Min)",
         country: "Country:",
         reset: "Reset",
         get: "FIND!"
@@ -26,10 +26,10 @@ const translations = {
         footerText: "Movie Teller, Serhet Gokdemir tarafindan olusturulmus hafif ve reklamsiz bir film oneri uygulamasidir. ",
         footerLink: "Kisisel web sitemi gor.",
         genre: "Tur:",
-        yearMaxSelect : "Yil(Max):",
-        yearMinSelect: "Yil(Min):",
-        ratingMax: "Puan(Max):",
-        ratingMin: "Puan(Min):",
+        yearMaxSelect : "Yil (Max):",
+        yearMinSelect: "Yil (Min):",
+        ratingMax: "Puan (Max):",
+        ratingMin: "Puan (Min):",
         country: "Ulke:",
         reset: "Sifirla",
         get: "BUL!"
@@ -303,8 +303,8 @@ async function loadCountries() {
     const countrySelect = document.getElementById("country-select");
 
     const emptyOpt = document.createElement("option");
-    emptyOpt.value = "";
-    emptyOpt.textContent = "";
+    emptyOpt.value = "Any";
+    emptyOpt.textContent = "Any";
     countrySelect.appendChild(emptyOpt);
 
     countries.forEach(c => {
