@@ -218,6 +218,11 @@ input:checked + .slider:before {
     object-fit: cover;
 }
 
+#result-poster.hidden {
+    display: none;
+    border: none;
+}
+
 #result-info {
     flex: 1;
 }
@@ -232,6 +237,10 @@ input:checked + .slider:before {
     margin: 4px 0;
     font-size: 14px;
     display: block;
+}
+
+#result-extra {
+    white-space: pre-line;
 }
 
 #result-overview {

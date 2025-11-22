@@ -240,66 +240,61 @@ async function renderMovie(movie) {
     const overviewEl = document.getElementById("result-overview");
     const posterEl = document.getElementById("result-poster");
 
-    const details = await getMovieDetails(movie.id);
-    const director = await getDirector(movie.id);
-
     const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "?";
-    const voteCount = details.vote_count ? details.vote_count : "?";
     const year = movie.release_date ? movie.release_date.slice(0,4) : "?";
 
     if (movie.poster_path) {
         posterEl.src = `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
+        posterEl.classList.remove("hidden");
     } else {
         posterEl.src = "";
+        posterEl.classList.add("hidden");
     }
 
     titleEl.textContent = `${movie.title} (${year})`;
 
-    const genresText = details.genres && details.genres.length > 0
-        ? details.genres.map(g => g.name).join(", ")
-        : "";
-
-    const runtimeText = details.runtime ? `${details.runtime} min` : "?"; 
-    
-    const languagesText = details.spoken_languages && details.spoken_languages.length > 0
-        ? details.spoken_languages.map(l => l.english_name).join(", ")
-        : "";
-
-    const countriesText = details.production_countries && details.production_countries.length > 0
-        ? details.production_countries.map(c => c.name).join(", ")
-        : "";
-
-    const adultText = details.adult ? "Adult" : "General Audience";
-
+    // META ARTIK BOŞ KALACAK (rating burada değil)
     metaEl.textContent = "";
 
-    extraEl.innerHTML = `
-        ${director ? `Director: ${director}<br>` : ""}
-        ${genresText ? `Genres: ${genresText}<br>` : ""}
-        Runtime: ${runtimeText}<br>
-        Languages: ${languagesText}<br>
-        Countries: ${countriesText}<br>
-        Audience: ${adultText}<br>
-        Rating: ${rating}<br>
-        Vote Count: ${voteCount}
-    `;
+    let genresText = "";
+    if (movie.genre_ids && movie.genre_ids.length > 0) {
+        genresText = movie.genre_ids
+            .map(id => genreMap[id])
+            .filter(Boolean)
+            .join(", ");
+    }
+
+    const directorName = await getDirector(movie.id);
+    const details = await getMovieDetails(movie.id);
+
+    // ÜST BİLGİLER
+    const infoLines = [
+        `Director: ${directorName || "?"}`,
+        `Genres: ${genresText || "?"}`,
+        `Runtime: ${details.runtime ? details.runtime + " min" : "?"}`,
+        `Languages: ${
+            details.spoken_languages?.length
+                ? details.spoken_languages.map(l => l.english_name).join(", ")
+                : "?"
+        }`,
+        `Countries: ${
+            details.production_countries?.length
+                ? details.production_countries.map(c => c.name).join(", ")
+                : "?"
+        }`
+    ];
+
+    // EN ALTA GELECEK OLANLAR:
+    const bottomLines = [
+        `Rating: ${rating}`,
+        `Vote Count: ${details.vote_count ?? "?"}`
+    ];
+
+    // ExtraEl = ÜST BİLGİLER + RATING + VOTE COUNT
+    extraEl.textContent = [...infoLines, ...bottomLines].join("\n");
 
     overviewEl.textContent = movie.overview || "No description available.";
 }
-
-async function testTMDB() {
-    try {
-        const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
-        const data = await response.json();
-
-        console.log("TMDb bağlantı başarılı.");
-        console.log(data.results.slice(0, 5));
-    } catch (err) {
-        console.error("TMDb bağlantı hatası:", err);
-    }
-}
-
-testTMDB();
 
 async function loadGenres() {
     const res = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en`);
