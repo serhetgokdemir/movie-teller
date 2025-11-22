@@ -1,6 +1,8 @@
 const API_KEY = "e28d32543064b0ea4378929602b7fd88";
 const BASE_URL = "https://api.themoviedb.org/3";
 
+let genreMap = {};
+
 /* -------------------- TRANSLATIONS -------------------- */
 
 const translations = {
@@ -211,22 +213,60 @@ reset.addEventListener("click", () => {
 });
 
 /* -------------------- RESULTS SECTION --------------------*/
-function renderMovie(movie) {
+async function getDirector(movieId) {
+    try {
+        const res = await fetch(`${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`);
+        const data = await res.json();
+
+        const director = data.crew.find(member => member.job === "Director");
+        return director ? director.name : null;
+    } catch (err) {
+        console.error("Director fetch error:", err);
+        return null;
+    }
+}
+
+async function renderMovie(movie) {
     const titleEl = document.getElementById("result-title");
     const metaEl = document.getElementById("result-meta");
+    const extraEl = document.getElementById("result-extra");
     const overviewEl = document.getElementById("result-overview");
+    const posterEl = document.getElementById("result-poster");
 
     const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "?";
     const popularity = movie.popularity ? movie.popularity.toFixed(1) : "?";
+    const year = movie.release_date ? movie.release_date.slice(0,4) : "?";
 
-    titleEl.textContent = `${movie.title} (${movie.release_date?.slice(0,4) || "?"})`;
+    if (movie.poster_path) {
+        posterEl.src = `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
+    } else {
+        posterEl.src = "";
+    }
 
-    metaEl.textContent =
-        `Rating: ${rating} | Popularity: ${popularity}`;
+    titleEl.textContent = `${movie.title} (${year})`;
+
+    const directorName = await getDirector(movie.id);
+
+    let genresText = "";
+    if (movie.genre_ids && movie.genre_ids.length > 0) {
+        genresText = movie.genre_ids
+            .map(id => genreMap[id])
+            .filter(Boolean)
+            .join(", ");
+    }
+
+    extraEl.innerHTML = `
+        <div>Director: ${directorName || "?"}</div>
+        <div>Genres: ${genresText || "?"}</div>
+    `;
+
+    metaEl.innerHTML = `
+        <div>Rating: ${rating}</div>
+        <div>Popularity: ${popularity}</div>
+    `;
 
     overviewEl.textContent = movie.overview || "No description available.";
 }
-
 
 async function testTMDB() {
     try {
@@ -243,7 +283,7 @@ async function testTMDB() {
 testTMDB();
 
 async function loadGenres() {
-    const res = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en`);
+    const res = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en`);
     const data = await res.json();
 
     const genreSelect = document.getElementById("genre-select");
@@ -258,6 +298,8 @@ async function loadGenres() {
         opt.value = genre.id;
         opt.textContent = genre.name;
         genreSelect.appendChild(opt);
+
+        genreMap[genre.id] = genre.name; // !! BURASI ÖNEMLİ !!
     });
 }
 
