@@ -18,7 +18,7 @@ const translations = {
         ratingMax: "Rating (Max):",
         ratingMin: "Rating (Min)",
         country: "Country:",
-        reset: "Reset",
+        reset: "Reset Filters",
         get: "FIND!"
     },
     tr: {
@@ -33,7 +33,7 @@ const translations = {
         ratingMax: "Puan (Max):",
         ratingMin: "Puan (Min):",
         country: "Ulke:",
-        reset: "Sifirla",
+        reset: "Filtreleri Sifirla",
         get: "BUL!"
     }
 };
