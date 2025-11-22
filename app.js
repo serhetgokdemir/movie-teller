@@ -13,7 +13,7 @@ const translations = {
         footerText: "Movie Teller is a lightweight and add-free movie recommendation app created by Serhet Gokdemir. ",
         footerLink: "See my other work.",
         genre: "Genre:",
-        yearMaxSelect: "Year Max):",
+        yearMaxSelect: "Year (Max):",
         yearMinSelect: "Year (Min):",
         ratingMax: "Rating (Max):",
         ratingMin: "Rating (Min)",
