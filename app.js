@@ -9,7 +9,6 @@ const translations = {
     en: {
         headerTitle: "your own personal movie-teller",
         description: "describe the movie and get a recommendation",
-        placeholderResults: "placeholder",
         footerText: "Movie Teller is a lightweight and add-free movie recommendation app created by Serhet Gokdemir. ",
         footerLink: "See my other work.",
         genre: "Genre:",
@@ -24,7 +23,6 @@ const translations = {
     tr: {
         headerTitle: "your own personal movie-teller",
         description: "filmi tarif et, oneriyi al",
-        placeholderResults: "placeholder",
         footerText: "Movie Teller, Serhet Gokdemir tarafindan olusturulmus hafif ve reklamsiz bir film oneri uygulamasidir. ",
         footerLink: "Diger calismalarimi gormek icin tiklayin.",
         genre: "Tur:",
