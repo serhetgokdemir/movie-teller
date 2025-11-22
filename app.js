@@ -213,6 +213,13 @@ reset.addEventListener("click", () => {
 });
 
 /* -------------------- RESULTS SECTION --------------------*/
+async function getMovieDetails(movieId) {
+    const res = await fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`);
+    return await res.json();
+}
+
+
+// getDirector fonksiyonu, renderMovie 'den once cagirilmalidir. yerini degistirme.
 async function getDirector(movieId) {
     try {
         const res = await fetch(`${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`);
@@ -233,8 +240,11 @@ async function renderMovie(movie) {
     const overviewEl = document.getElementById("result-overview");
     const posterEl = document.getElementById("result-poster");
 
+    const details = await getMovieDetails(movie.id);
+    const director = await getDirector(movie.id);
+
     const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "?";
-    const popularity = movie.popularity ? movie.popularity.toFixed(1) : "?";
+    const voteCount = details.vote_count ? details.vote_count : "?";
     const year = movie.release_date ? movie.release_date.slice(0,4) : "?";
 
     if (movie.poster_path) {
@@ -245,24 +255,33 @@ async function renderMovie(movie) {
 
     titleEl.textContent = `${movie.title} (${year})`;
 
-    const directorName = await getDirector(movie.id);
+    const genresText = details.genres && details.genres.length > 0
+        ? details.genres.map(g => g.name).join(", ")
+        : "";
 
-    let genresText = "";
-    if (movie.genre_ids && movie.genre_ids.length > 0) {
-        genresText = movie.genre_ids
-            .map(id => genreMap[id])
-            .filter(Boolean)
-            .join(", ");
-    }
+    const runtimeText = details.runtime ? `${details.runtime} min` : "?"; 
+    
+    const languagesText = details.spoken_languages && details.spoken_languages.length > 0
+        ? details.spoken_languages.map(l => l.english_name).join(", ")
+        : "";
+
+    const countriesText = details.production_countries && details.production_countries.length > 0
+        ? details.production_countries.map(c => c.name).join(", ")
+        : "";
+
+    const adultText = details.adult ? "Adult" : "General Audience";
+
+    metaEl.textContent = "";
 
     extraEl.innerHTML = `
-        <div>Director: ${directorName || "?"}</div>
-        <div>Genres: ${genresText || "?"}</div>
-    `;
-
-    metaEl.innerHTML = `
-        <div>Rating: ${rating}</div>
-        <div>Popularity: ${popularity}</div>
+        ${director ? `Director: ${director}<br>` : ""}
+        ${genresText ? `Genres: ${genresText}<br>` : ""}
+        Runtime: ${runtimeText}<br>
+        Languages: ${languagesText}<br>
+        Countries: ${countriesText}<br>
+        Audience: ${adultText}<br>
+        Rating: ${rating}<br>
+        Vote Count: ${voteCount}
     `;
 
     overviewEl.textContent = movie.overview || "No description available.";
