@@ -78,8 +78,11 @@ body {
 
 
 /* ----------- DESCRIBE-MOVIE ----------- */
-#onoff{
-    text-align: right;
+#onoff {
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
+    padding-right: 6px;
 }
 
 #describe-movie{
@@ -141,12 +144,12 @@ body {
     width: 120px;
 }
 
-/* KÜÇÜK TOGGLE */
+/* TOGGLE*/
 .switch {
     position: relative;
     display: inline-block;
-    width: 28px;
-    height: 14px;
+    width: 25px;
+    height: 20px;
 }
 
 .switch input {
@@ -157,23 +160,17 @@ body {
 .slider {
     position: absolute;
     cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100%;
     background-color: #555;
     border-radius: 14px;
     transition: 0.25s;
 }
 
-
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 10px;
-    width: 10px;
-    left: 2px;
-    bottom: 2px;
-    background-color: yellow;
-    border-radius: 50%;
-    transition: 0.25s;
+    display: none;
 }
 
 input:checked + .slider {
@@ -181,7 +178,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(14px);
+    transform: translateX(10px);
 }
 
 
@@ -331,7 +328,7 @@ input:checked + .slider:before {
 
     .switch {
         width: 20px;
-        height: 10px;
+        height: px;
     }
 
     .slider {
@@ -339,10 +336,7 @@ input:checked + .slider:before {
     }
 
     .slider:before {
-        height: 8px;
-        width: 8px;
-        left: 1px;
-        bottom: 1px;
+        display: none;
     }
 
     input:checked + .slider:before {
