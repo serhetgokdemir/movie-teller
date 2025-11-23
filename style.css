@@ -184,7 +184,6 @@ input:checked + .slider:before {
 
 /* ----------- RESULTS ----------- */
 #results{
-    border: 3px solid black;
     width: 95%;
     margin-bottom: 5px;
     text-align: left;
