@@ -78,6 +78,10 @@ body {
 
 
 /* ----------- DESCRIBE-MOVIE ----------- */
+#onoff{
+    text-align: right;
+}
+
 #describe-movie{
     width: 95%;
     margin-bottom: 5px;

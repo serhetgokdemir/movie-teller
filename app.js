@@ -18,7 +18,8 @@ const translations = {
         ratingMin: "Rating (Min)",
         country: "Country:",
         reset: "Reset Filters",
-        get: "FIND!"
+        get: "FIND!",
+        onoff: "ON/OFF"
     },
     tr: {
         headerTitle: "your own personal movie-teller",
@@ -32,7 +33,8 @@ const translations = {
         ratingMin: "Puan (Min):",
         country: "Ulke:",
         reset: "Filtreleri Sifirla",
-        get: "BUL!"
+        get: "BUL!",
+        onoff: "AC/KAPAT"
     }
 };
 
@@ -48,6 +50,7 @@ function setLanguage(lang) {
     document.getElementById("footer-link").textContent = t.footerLink;
     document.getElementById("reset").textContent = t.reset;
     document.getElementById("get").textContent = t.get;
+    document.getElementById("onoff").textContent = t.onoff;
 
 
     document.querySelector('label[for="genre"]').textContent = t.genre;
