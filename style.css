@@ -276,6 +276,29 @@ input:checked + .slider:before {
     font-size: 45px;
 }
 
+/* ------ YUKLENME ANIMASYONU ------*/
+@keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in-down {
+    animation: fadeInDown 1.25s ease-out forwards;
+  }
+
+  .full-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /* ------------- RESPONSIVE WIDTH -------------*/
 
 /* ------------- GENEL -------------*/
