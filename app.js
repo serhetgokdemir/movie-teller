@@ -19,7 +19,9 @@ const translations = {
         country: "Country:",
         reset: "Reset Filters",
         get: "FIND!",
-        onoff: "ON/OFF"
+        onoff: "ON/OFF",
+        errorMinYear: "Min year cannot be greater than Max year.",
+        errorMinRating: "Min rating cannot be greater than Max rating."
     },
     tr: {
         headerTitle: "your own personal movie-teller",
@@ -34,10 +36,12 @@ const translations = {
         country: "Ulke:",
         reset: "Filtreleri Sifirla",
         get: "BUL!",
-        onoff: "AC/KAPAT"
+        onoff: "AC/KAPAT",
+        errorMinYear: "Minimum yıl maksimum yıldan büyük olamaz.",
+        errorMinRating: "Minimum puan maksimum puandan büyük olamaz."
     }
 };
-
+let currentLang = "en";
 
 /* -------------------- LANGUAGE SET -------------------- */
 
@@ -78,6 +82,7 @@ options.querySelectorAll("li").forEach(option => {
         selected.textContent = text;
         options.style.display = "none";
 
+        currentLang = value;
         setLanguage(value);
     });
 });
@@ -328,14 +333,15 @@ findBtn.addEventListener("click", async () => {
     document.getElementById("loading").classList.remove("hidden");
     document.getElementById("loading").classList.add("visible");
 
+    const t = translations[currentLang];
+
     // YEAR VALIDATION
     const minYearVal = yearMinSelect.value ? Number(yearMinSelect.value) : null;
     const maxYearVal = yearMaxSelect.value ? Number(yearMaxSelect.value) : null;
 
     if (minYearVal !== null && maxYearVal !== null && minYearVal > maxYearVal) {
+        alert(t.errorMinYear);
 
-        alert("Min year cannot be greater than Max year.");
-        
         document.getElementById("loading").classList.remove("visible");
         setTimeout(() => {
             document.getElementById("loading").classList.add("hidden");
@@ -349,9 +355,8 @@ findBtn.addEventListener("click", async () => {
     const maxRatingVal = ratingMax.value ? Number(ratingMax.value) : null;
 
     if (minRatingVal !== null && maxRatingVal !== null && minRatingVal > maxRatingVal) {
+        alert(t.errorMinRating);
 
-        alert("Min rating cannot be greater than Max rating.");
-        
         document.getElementById("loading").classList.remove("visible");
         setTimeout(() => {
             document.getElementById("loading").classList.add("hidden");
