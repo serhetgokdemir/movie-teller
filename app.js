@@ -336,8 +336,13 @@ findBtn.addEventListener("click", async () => {
     const t = translations[currentLang];
 
     // YEAR VALIDATION
-    const minYearVal = yearMinSelect.value ? Number(yearMinSelect.value) : null;
-    const maxYearVal = yearMaxSelect.value ? Number(yearMaxSelect.value) : null;
+    const minYearVal = (useYearMin.checked && yearMinSelect.value)
+        ? Number(yearMinSelect.value)
+        : null;
+
+    const maxYearVal = (useYearMax.checked && yearMaxSelect.value)
+        ? Number(yearMaxSelect.value)
+        : null;
 
     if (minYearVal !== null && maxYearVal !== null && minYearVal > maxYearVal) {
         alert(t.errorMinYear);
@@ -351,8 +356,13 @@ findBtn.addEventListener("click", async () => {
     }
 
     // RATING VALIDATION
-    const minRatingVal = ratingMin.value ? Number(ratingMin.value) : null;
-    const maxRatingVal = ratingMax.value ? Number(ratingMax.value) : null;
+    const minRatingVal = (useRatingMin.checked && ratingMin.value !== "")
+        ? Number(ratingMin.value)
+        : null;
+
+    const maxRatingVal = (useRatingMax.checked && ratingMax.value !== "")
+        ? Number(ratingMax.value)
+        : null;
 
     if (minRatingVal !== null && maxRatingVal !== null && minRatingVal > maxRatingVal) {
         alert(t.errorMinRating);
@@ -365,6 +375,7 @@ findBtn.addEventListener("click", async () => {
         return;
     }
 
+    // If everything is OK, then start the show
     let url = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
 
     // GENRE
