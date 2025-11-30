@@ -328,6 +328,38 @@ findBtn.addEventListener("click", async () => {
     document.getElementById("loading").classList.remove("hidden");
     document.getElementById("loading").classList.add("visible");
 
+    // YEAR VALIDATION
+    const minYearVal = yearMinSelect.value ? Number(yearMinSelect.value) : null;
+    const maxYearVal = yearMaxSelect.value ? Number(yearMaxSelect.value) : null;
+
+    if (minYearVal !== null && maxYearVal !== null && minYearVal > maxYearVal) {
+
+        alert("Min year cannot be greater than Max year.");
+        
+        document.getElementById("loading").classList.remove("visible");
+        setTimeout(() => {
+            document.getElementById("loading").classList.add("hidden");
+        }, 200);
+
+        return;
+    }
+
+    // RATING VALIDATION
+    const minRatingVal = ratingMin.value ? Number(ratingMin.value) : null;
+    const maxRatingVal = ratingMax.value ? Number(ratingMax.value) : null;
+
+    if (minRatingVal !== null && maxRatingVal !== null && minRatingVal > maxRatingVal) {
+
+        alert("Min rating cannot be greater than Max rating.");
+        
+        document.getElementById("loading").classList.remove("visible");
+        setTimeout(() => {
+            document.getElementById("loading").classList.add("hidden");
+        }, 200);
+
+        return;
+    }
+
     let url = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
 
     // GENRE
