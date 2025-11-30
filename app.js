@@ -325,6 +325,9 @@ const genreToggle = document.getElementById("genre-toggle");
 
 findBtn.addEventListener("click", async () => {
 
+    document.getElementById("loading").classList.remove("hidden");
+    document.getElementById("loading").classList.add("visible");
+
     let url = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
 
     // GENRE
@@ -364,6 +367,12 @@ findBtn.addEventListener("click", async () => {
     let totalPages = Math.min(firstData.total_pages || 1, 500);
 
     if (totalPages === 0) {
+
+        document.getElementById("loading").classList.remove("visible");
+        setTimeout(() => {
+            document.getElementById("loading").classList.add("hidden");
+        }, 250);
+
         renderMovie({
             title: "No movie found.",
             overview: "",
@@ -380,6 +389,12 @@ findBtn.addEventListener("click", async () => {
     const pageData = await pageRes.json();
 
     if (!pageData.results || pageData.results.length === 0) {
+
+        document.getElementById("loading").classList.remove("visible");
+        setTimeout(() => {
+            document.getElementById("loading").classList.add("hidden");
+        }, 250);
+
         renderMovie({
             title: "No movie found.",
             overview: "",
@@ -392,6 +407,11 @@ findBtn.addEventListener("click", async () => {
     // Movie randomizer
     const randomIndex = Math.floor(Math.random() * pageData.results.length);
     const movie = pageData.results[randomIndex];
+
+    document.getElementById("loading").classList.remove("visible");
+    setTimeout(() => {
+        document.getElementById("loading").classList.add("hidden");
+    }, 250);
 
     renderMovie(movie);
 });

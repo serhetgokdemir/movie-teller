@@ -203,8 +203,6 @@ input:checked + .slider:before {
     color: rgb(239, 239, 239);
 }
 
-/* ----------- NEW RESULTS LAYOUT ----------- */
-
 #result-top {
     display: flex;
     gap: 15px;
@@ -250,6 +248,34 @@ input:checked + .slider:before {
     font-size: 15px;
 }
 
+#loading {
+    text-align: center;
+    font-size: 18px;
+    margin: 15px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* RESULTS LOADING*/
+#loading.visible {
+    opacity: 1;
+}
+
+.spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid yellow;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    margin: 8px auto;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
 /* ----------- FOOTER ----------- */
 #footer{
     width: 95%;
@@ -276,7 +302,7 @@ input:checked + .slider:before {
     font-size: 45px;
 }
 
-/* ------ YUKLENME ANIMASYONU ------*/
+/* ------ BODY YUKLENME ANIMASYONU ------*/
 @keyframes fadeInDown {
     from {
       opacity: 0;
